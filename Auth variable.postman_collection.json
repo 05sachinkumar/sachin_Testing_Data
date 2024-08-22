@@ -1,0 +1,346 @@
+{
+	"info": {
+		"_postman_id": "69a35258-c448-4989-8819-1e1c27cdb746",
+		"name": "Auth variable",
+		"description": "This Collection consist of **RestFul API's that are public + secured APIs**. The Auth type used are-\n\n**1). Basic Auth**\n\n**2). Digest Auth**\n\n**3). Bearer Token Auth**\n\nif enter valid credentials, we recieve **200 OK** from server else we recieve **401 UnAuthorized** from server.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37635178",
+		"_collection_link": "https://sac2024.postman.co/workspace/sachin_public~10639d94-980d-47ac-b333-f8e4b13fb416/collection/37635178-69a35258-c448-4989-8819-1e1c27cdb746?action=share&source=collection_link&creator=37635178"
+	},
+	"item": [
+		{
+			"name": "POSITIVE TC",
+			"item": [
+				{
+					"name": "BASIC_AUTH",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//javaScript code---\r",
+									"pm.test(\"Verify if 200 is recieved\", function () {\r",
+									"\tpm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if ok is response message\", function () {\r",
+									"\tpm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify the response body containe some string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"authenticated\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"user\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Veerify contain type response header application/json\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\",\"application/json\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"collUN = pm.collectionVariables.get(\"cUN\");\r",
+									"collPwd = pm.collectionVariables.get(\"cPwd\");\r",
+									"collToken = pm.collectionVariables.get(\"cToken\");\r",
+									"\r",
+									"console.log(\"value of cUN is:\"+collUN);\r",
+									"console.log(\"value of cUN is:\"+collPwd);\r",
+									"console.log(\"value of cUN is:\"+collToken);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{cPwd}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{cUN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/basic-auth/user/user123",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"basic-auth",
+								"user",
+								"user123"
+							]
+						},
+						"description": "This is a Restful API that uses BASIC AUTHORIZATION"
+					},
+					"response": []
+				},
+				{
+					"name": "Bearer Token Authorization",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// JavaScript Code\r",
+									"pm.test(\"Verify if 200 is recieved\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if OK response message\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if response body contain some string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"authenticated\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"token\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if content type response header is application/json\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\",\"application/json\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{cToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/bearer",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"bearer"
+							]
+						},
+						"description": "This is a Restful API's that uses Bearer Token Authorization"
+					},
+					"response": []
+				},
+				{
+					"name": "https://httpbin.org/digest-auth/auth/user/password",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//JavaScript Code-----\r",
+									"pm.test(\"Verify if 200 is recieved\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"verify if Ok response message\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if response body contain some string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"authenticated\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"user\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\",\"application/json\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "digest",
+							"digest": [
+								{
+									"key": "qop",
+									"value": "auth",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "MD5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/digest-auth/auth/user/password",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"digest-auth",
+								"auth",
+								"user",
+								"password"
+							]
+						},
+						"description": "This is a Restful API's that uses a Digest Auhtorization"
+					},
+					"response": []
+				},
+				{
+					"name": "Digest_Auth_Algorithm",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//javascript code\r",
+									"pm.test(\"verify ok is recieved\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if ok response message\", function () {\r",
+									"    pm.response.to.have.status(\"OK\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Verify if response body contain some string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"authenticated\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"user\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Content-Type header is present\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\",\"application/json\");\r",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "digest",
+							"digest": [
+								{
+									"key": "password",
+									"value": "passwd",
+									"type": "string"
+								},
+								{
+									"key": "qop",
+									"value": "auth",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "user",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "MD5",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://httpbin.org/digest-auth/auth/user/passwd/MD5",
+							"protocol": "https",
+							"host": [
+								"httpbin",
+								"org"
+							],
+							"path": [
+								"digest-auth",
+								"auth",
+								"user",
+								"passwd",
+								"MD5"
+							]
+						},
+						"description": "This is a Restful API that use Digest Auth Algorithm"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "cUN",
+			"value": "user"
+		},
+		{
+			"key": "cPwd",
+			"value": "user123"
+		},
+		{
+			"key": "cToken",
+			"value": "sach",
+			"type": "string"
+		}
+	]
+}

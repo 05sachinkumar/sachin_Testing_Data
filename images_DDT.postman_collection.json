@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "2c8832ef-e760-4773-9db8-bf089d03c4e2",
+		"name": "images_DDT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37635178",
+		"_collection_link": "https://sac2024.postman.co/workspace/sachin_public~10639d94-980d-47ac-b333-f8e4b13fb416/collection/37635178-2c8832ef-e760-4773-9db8-bf089d03c4e2?action=share&source=collection_link&creator=37635178"
+	},
+	"item": [
+		{
+			"name": "jpg-API",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "user",
+						"value": "{{myUserAgent}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://httpbin.org/image/jpeg",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"image",
+						"jpeg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "png-API",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "{{myUserAgent}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://httpbin.org/image/png",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"image",
+						"png"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "svg-API",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "{{myUserAgent}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://httpbin.org/image/svg",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"image",
+						"svg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "webp-API",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "{{myUserAgent}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://httpbin.org/image/webp",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"image",
+						"webp"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

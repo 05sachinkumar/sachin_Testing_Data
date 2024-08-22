@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "bdf4219f-57cc-4462-a544-58d6b9e7ae07",
+		"name": "COLLECTION_VARIABLE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37635178",
+		"_collection_link": "https://sac2024.postman.co/workspace/sachin_public~10639d94-980d-47ac-b333-f8e4b13fb416/collection/37635178-bdf4219f-57cc-4462-a544-58d6b9e7ae07?action=share&source=collection_link&creator=37635178"
+	},
+	"item": [
+		{
+			"name": "xml-API",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"before deleting a variable\");\r",
+							"\r",
+							"console.log(pm.collectionVariables.get(\"cPROTOCOL\"));\r",
+							"console.log(pm.collectionVariables.get(\"cBaseURL\"));\r",
+							"\r",
+							"pm.collectionVariables.unset(\"cPROTOCOL\");\r",
+							"pm.collectionVariables.unset(\"cBaseURL\");\r",
+							"\r",
+							"console.log(\"After deleting a Variable\");\r",
+							"\r",
+							"console.log(pm.collectionVariables.get(\"cPROTOCOL\"));\r",
+							"console.log(pm.collectionVariables.get(\"cBaseURL\"));\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://httpbin.org/{{cEndPoint}}",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"{{cEndPoint}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Text-API",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"console.log(\"Before Creating a Variables\");\r",
+							"\r",
+							"console.log(pm.collectionVariables.get(\"cPROTOCOL\"));\r",
+							"console.log(pm.collectionVariables.get(\"cBaseURL\"));\r",
+							"\r",
+							"console.log(\"Creating a Variables\");\r",
+							"\r",
+							"pm.collectionVariables.set(\"cPROTOCOL\", \"https\");\r",
+							"pm.collectionVariables.set(\"cBaseURL\", \"httpbin.org\");\r",
+							"\r",
+							"console.log(pm.collectionVariables.get(\"cPROTOCOL\"));\r",
+							"console.log(pm.collectionVariables.get(\"cBaseURL\"));"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://{{cBaseURL}}/robots.txt",
+					"protocol": "https",
+					"host": [
+						"{{cBaseURL}}"
+					],
+					"path": [
+						"robots.txt"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Json-API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{cPROTOCOL}}://httpbin.org/json",
+					"protocol": "{{cPROTOCOL}}",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"json"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "HTML-API",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"user-agent": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "User-Agent",
+						"value": "{{cUserAgent}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://httpbin.org/html",
+					"protocol": "https",
+					"host": [
+						"httpbin",
+						"org"
+					],
+					"path": [
+						"html"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CREATE USER USING POST",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"pm.test(\"respone body contain string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"job\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"city\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"id\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"createdAt\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{cName}}\",\r\n    \"job\": \"{{cJob}}\",\r\n    \"city\": \"faridabad\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE USER",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//JAVASCRIPT CODE\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"response body is string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"name\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"job\");\r",
+							"    pm.expect(pm.response.text()).to.include(\"updatedAt\");\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"{{cName}}\",\r\n    \"job\": \"{{$randomJobTitle}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://reqres.in/api/users/2",
+					"protocol": "https",
+					"host": [
+						"reqres",
+						"in"
+					],
+					"path": [
+						"api",
+						"users",
+						"2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "cUserAgent",
+			"value": "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_6_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/127.0.0.0 Safari/537.36"
+		},
+		{
+			"key": "cEndPoint",
+			"value": "xml"
+		},
+		{
+			"key": "cName",
+			"value": "sachin ",
+			"type": "string"
+		},
+		{
+			"key": "cJob",
+			"value": "API Tester",
+			"type": "string"
+		},
+		{
+			"key": "cPROTOCOL",
+			"value": ""
+		},
+		{
+			"key": "cBaseURL",
+			"value": ""
+		}
+	]
+}
